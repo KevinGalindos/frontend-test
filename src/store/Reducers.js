@@ -1,11 +1,15 @@
 import { combineReducers } from '@reduxjs/toolkit'
 
-const AppReducer = combineReducers({
+import PostsReducer, { PostsState } from './../services/Posts'
 
+const AppReducer = combineReducers({
+  Posts: PostsReducer
 })
 
 const RootReducers = (state, action) => {
-  if(action.type === 'auth/logout') state = undefined
+  if(action.type === 'auth/logout') state = {
+    Posts: PostsState
+  }
   return AppReducer(state, action)
 }
 
