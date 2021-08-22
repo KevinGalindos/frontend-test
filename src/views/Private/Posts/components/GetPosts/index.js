@@ -1,0 +1,1 @@
+export { GetPosts } from './GetPosts'

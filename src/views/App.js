@@ -1,9 +1,12 @@
+import { Private } from "../routes/Private";
+import { Public } from "../routes/Public";
 
+const App = () => {
+  const auth = false
 
-function App() {
   return (
     <div className="App">
-     
+     {auth? <Private />: <Public />}
     </div>
   );
 }

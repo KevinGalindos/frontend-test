@@ -1,0 +1,1 @@
+export { UpdatePosts } from './UpdatePosts'
