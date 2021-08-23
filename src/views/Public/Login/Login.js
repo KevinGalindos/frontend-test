@@ -3,8 +3,8 @@ import { useInput } from './../../../hooks/useInput'
 import "./Login.scss"
 
 const Login = () => {
-  const username = useInput({ type: 'text' })
-  const password = useInput({ type: 'password'})
+  const username = useInput({ type: 'text', min: 4, max: 45 })
+  const password = useInput({ type: 'password', min: 6, max: 150 })
 
   return (
     <div>
@@ -15,6 +15,7 @@ const Login = () => {
           onChange={username.onChangeInput}
           value={username.value}
         />
+        <span>{username.stateInput.message}</span>
       </div>
 
       <div>
@@ -24,6 +25,7 @@ const Login = () => {
           onChange={password.onChangeInput}
           value={password.value}
         />
+        <span>{password.stateInput.message}</span>
       </div>
 
       <div>
