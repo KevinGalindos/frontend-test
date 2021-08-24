@@ -2,7 +2,9 @@ import { put, takeLatest, all } from "redux-saga/effects";
 
 import { login, logout } from './index'
 
-function* Login(){}
+function* Login({ type, payload }){}
+
+function* Signup(){}
 
 const Logout = () => localStorage.clear();
 
