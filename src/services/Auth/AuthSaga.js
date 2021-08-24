@@ -1,9 +1,13 @@
 import { put, takeLatest, all } from "redux-saga/effects";
-import { logout } from './index'
+
+import { login, logout } from './index'
+
+function* Login(){}
 
 const Logout = () => localStorage.clear();
 
 function* ActionWatcher() {
+  yield takeLatest(login, Login);
   yield takeLatest(logout, Logout);
 }
 

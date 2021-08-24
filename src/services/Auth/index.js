@@ -1,6 +1,6 @@
 import { AuthSlice } from './AuthSlice'
 
-export const { logout } = AuthSlice.actions
+export const { logout, login, loginSuccess, loginFailed  } = AuthSlice.actions
 
 export { initialState as AuthState } from './AuthSlice'
 

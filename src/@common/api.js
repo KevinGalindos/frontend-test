@@ -1,11 +1,12 @@
 import Store from './../store'
 import { logout } from './../services/Auth'
+import { BASE_URL_API } from './environment'
 
 export const GET = (url, params) => {}
 
 export const POST = async (url, body, header) => {
   return Promise.race([
-    fetch(`${URL_API}/${url}`, {
+    fetch(`${BASE_URL_API}/${url}`, {
       method: "POST",
       headers: header
         ? header
