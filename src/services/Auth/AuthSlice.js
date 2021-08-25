@@ -15,7 +15,7 @@ export const AuthSlice = createSlice({
     login: (state, { payload }) => ({
       ...state,
       loading: true,
-      account: payload.account
+      message: ''
     }),
     loginSuccess: (state, { payload }) => ({
       ...state,
@@ -31,6 +31,9 @@ export const AuthSlice = createSlice({
       uuidUser: '',
       message: payload.message
     }),
+    signup: () => ({}),
+    signupSuccess: () => ({}),
+    signupFailed: () => ({}),
     logout: (state) => ({
       ...state,
       uuidUser: '',

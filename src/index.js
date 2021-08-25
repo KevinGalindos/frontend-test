@@ -7,6 +7,8 @@ import Store from './store';
 
 import reportWebVitals from './reportWebVitals';
 
+import "./sass/_all.scss"
+
 ReactDOM.render(
 
   <Provider store={Store}>

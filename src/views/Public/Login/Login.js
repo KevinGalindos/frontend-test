@@ -1,9 +1,7 @@
-import { useState } from "react";
+import { useState } from "react"
 import { Link } from '@reach/router'
-
-import Logo from '../../../assets/medium.svg'
-
-import { Visibility, VisibilityOff } from "@material-ui/icons";
+import { useDispatch } from 'react-redux'
+import { Visibility, VisibilityOff, Facebook, GitHub } from "@material-ui/icons"
 import {
   Button,
   FormControl,
@@ -12,33 +10,39 @@ import {
   IconButton,
   OutlinedInput,
   InputAdornment,
-} from "@material-ui/core";
+} from "@material-ui/core"
 
-import { useInput } from "./../../../hooks/useInput";
+import Logo from '../../../assets/medium.svg'
+import { useInput } from "./../../../hooks/useInput"
+import { login } from './../../../services/Auth'
 
-import "./Login.scss";
+import "./Login.scss"
 
 const Login = () => {
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false)
+  const username = useInput({ type: "text", min: 4, max: 45 })
+  const password = useInput({ type: "password", min: 6, max: 150 })
+  const dispatch = useDispatch();
 
   const handleClickShowPassword = () => setShowPassword(!showPassword);
 
-  const username = useInput({ type: "text", min: 4, max: 45 });
-  const password = useInput({ type: "password", min: 6, max: 150 });
+  const submitLogin= ({ method }) => {
+    if(method) dispatch(login({ method: method }))
+    else dispatch(login({ username: username.value, password: password.value }))
+  }
 
   return (
     <div className="login">
-      <div className="container">
-        
+      <div className="container"> 
         <form className="login-form" noValidate autoComplete="off">
-        <div className="login-form-logo">
-          <Link to="/Home">
-          <img src= { Logo } alt="LogoWaco" />
-          </Link>
-        </div>
+          <div className="login-form-logo">
+            <Link to="/Home">
+              <img src= { Logo } alt="LogoWaco" />
+            </Link>
+          </div>
           <div className="login_form_username">
             <TextField
-            className="texfield-class"
+              className="texfield-class"
               error={username.stateInput.error}
               id="outlined-error-helper-text"
               label="Email"
@@ -70,11 +74,10 @@ const Login = () => {
                       onClick={handleClickShowPassword}
                       edge="end"
                     >
-                      {password.showPassword ? (
-                        <Visibility />
-                      ) : (
-                        <VisibilityOff />
-                      )}
+                      {showPassword 
+                        ? (<Visibility />) 
+                        : (<VisibilityOff />)
+                      }
                     </IconButton>
                   </InputAdornment>
                 }
@@ -84,8 +87,27 @@ const Login = () => {
           </div>
 
           <div className="login_button">
-            <Button className="btn-login" variant="contained">
+            <Button className="btn-login" variant="contained"
+              onClick={()=> submitLogin({})}
+            >
               Ingresar
+            </Button>
+
+            <Button  
+              variant="contained" 
+              onClick={()=>submitLogin({ method: 'Facebook' })}
+            >
+              <Facebook />
+            </Button>
+
+            <Button
+              variant="contained" 
+              onClick={()=>submitLogin({ method: 'Google' })}
+            >
+              <GitHub />
+            </Button>
+            <Button>
+              Google
             </Button>
           </div>
         </form>
