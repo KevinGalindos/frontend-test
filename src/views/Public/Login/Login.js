@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from '@reach/router'
 
 import Logo from '../../../assets/medium.svg'
 
@@ -31,8 +32,9 @@ const Login = () => {
         
         <form className="login-form" noValidate autoComplete="off">
         <div className="login-form-logo">
+          <Link to="/Home">
           <img src= { Logo } alt="LogoWaco" />
-
+          </Link>
         </div>
           <div className="login_form_username">
             <TextField
