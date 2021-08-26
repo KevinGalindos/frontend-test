@@ -12,7 +12,7 @@ import {
   InputAdornment,
 } from "@material-ui/core"
 
-import Logo from '../../../assets/medium.svg'
+import Logo from '../../../assets/Logo-medium.svg'
 import { useInput } from "./../../../hooks/useInput"
 import { login } from './../../../services/Auth'
 

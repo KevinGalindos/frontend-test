@@ -1,17 +1,12 @@
-import { string } from 'prop-types'
 
-export const Loading = ({ message }) => {
+import "./Loading.scss"
+
+export const Loading = () => {
   return (
-    <div>
-      {message}
+    <div className="loading">
+      <div className="arc"></div>
+      <div className="arc"></div>
+      <div className="arc"></div>
     </div>
-  )
-}
-
-Loading.propTypes = {
-  message: string.isRequired
-}
-
-Loading.defaultProps = {
-  message: 'Cargando...'
-}
+  );
+};

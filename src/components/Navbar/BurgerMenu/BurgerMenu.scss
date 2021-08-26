@@ -1,0 +1,20 @@
+.burger-menu {
+  display: none;
+  flex-direction: column;
+  padding-right: 10px;
+  i {
+    transition: all ease-in-out 0.3s;
+    cursor: pointer;
+    font-size: 30px;
+
+  }
+
+}
+
+
+@media (max-width: 960px){
+  .burger-menu{
+    display: flex;
+    flex-direction: column;
+  }
+}
