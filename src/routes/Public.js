@@ -10,7 +10,7 @@ const Signup = lazy(()=> import("./../views/Public/Signup"))
 export const Public = () => {
   return (
     <Suspense fallback={
-      <Loading message="Cargando vistas"/>
+      <Loading />
     }>
       <Router>
         <Home path="/" />
