@@ -1,7 +1,8 @@
 import { put, takeLatest, all, call } from "redux-saga/effects";
 
-import { login, logout, loginSuccess, loginFailed } from './index'
+import { login, logout, loginSuccess, loginFailed, signup, signupSuccess, signupFailed } from './index'
 import {  FirebaseAuth, GoogleAuth, FacebookAuth } from './../../@common/firebase'
+import { SaveItem } from './../../@common/storage'
 
 function*  Login({ type, payload }){
   let account
@@ -30,6 +31,7 @@ function*  Login({ type, payload }){
         )
       )
     )
+    SaveItem(account.auth && {item: account.uuidUser})
     yield put(account.auth? loginSuccess(account): loginFailed(account)) 
   }else {
     account = yield call( () => 
@@ -52,17 +54,65 @@ function*  Login({ type, payload }){
         )
       )
     )
+    SaveItem(account.auth && {item: account.uuidUser})
     yield put(account.auth? loginSuccess(account): loginFailed(account)) 
   }
 }
 
-function* Signup(){}
+function* Signup({ type, payload } ){
+  let register
+  if(payload?.method){
+    register = yield call(() =>
+      new Promise( (resolve, _) => 
+        FirebaseAuth.auth()
+        .signInWithPopup(
+          payload.method === 'Google'
+          ? GoogleAuth
+          : FacebookAuth
+        )
+        .then(result =>
+          resolve({
+            success: true,
+            message: 'Registro exitoso!.',
+          }) 
+        )
+        .catch(err =>
+          resolve({
+            success: false,
+            message: err.message
+          })
+        )
+      )
+    )
+    yield put(register.success ? signupSuccess(register): signupFailed(register)) 
+  } else {
+    register = yield call( () => 
+      new Promise( (resolve, _ ) => 
+        FirebaseAuth.auth()
+        .createUserWithEmailAndPassword(payload.username, payload.password)
+        .then(result =>
+          resolve({
+            success: true,
+            message: 'Registro exitoso!.',
+          }) 
+        )
+        .catch(err =>
+          resolve({
+            success: false,
+            message: err.message
+          })
+        )
+      )
+    )
+    yield put(register.success? loginSuccess(register): loginFailed(register)) 
+  }
+}
 
 const Logout = () => localStorage.clear();
 
 function* ActionWatcher() {
   yield takeLatest(login, Login);
-  //yield takeLatest(si)
+  yield takeLatest(signup, Signup)
   yield takeLatest(logout, Logout);
 }
 

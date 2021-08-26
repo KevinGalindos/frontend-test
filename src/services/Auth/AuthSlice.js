@@ -1,7 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+import { CheckItem } from './../../@common/storage'
+
 export const initialState = {
-  authentication: '',
+  authentication: CheckItem(),
   uuidUser: '',
   loading: false,
   account: '',
@@ -31,9 +33,21 @@ export const AuthSlice = createSlice({
       uuidUser: '',
       message: payload.message
     }),
-    signup: () => ({}),
-    signupSuccess: () => ({}),
-    signupFailed: () => ({}),
+    signup: (state, { payload }) => ({
+      ...state,
+      loading: true,
+      message: '',
+    }),
+    signupSuccess: (state, { payload }) => ({
+      ...state,
+      loading: false,
+      message: payload.message,
+    }),
+    signupFailed: (state, { payload }) => ({
+      ...state,
+      loading: false,
+      message: payload.message
+    }),
     logout: (state) => ({
       ...state,
       uuidUser: '',
