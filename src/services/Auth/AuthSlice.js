@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import { CheckItem } from './../../@common/storage'
+import { CheckItem, GetItem } from './../../@common/storage'
 
 export const initialState = {
   authentication: CheckItem(),
-  uuidUser: '',
+  uuidUser: GetItem(),
   loading: false,
   account: '',
   message: ''
