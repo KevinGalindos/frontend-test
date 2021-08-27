@@ -1,6 +1,8 @@
 import { TextField, TextareaAutosize, Button } from '@material-ui/core'
 import { SaveOutlined } from '@material-ui/icons'
+import { useDispatch, useSelector } from 'react-redux'
 
+import { createPost} from './../../../../../services/Posts'
 import { useInput } from './../../../../../hooks/useInput'
 
 import "./CreatePost.scss"
@@ -8,6 +10,18 @@ import "./CreatePost.scss"
 export const CreatePost = () => {
   const title = useInput({ type: 'text', min: 4, max: 45 })
   const body = useInput({ type: 'text', min: 1, max: 240 })
+  const { uuidUser } = useSelector(state => state.Auth)
+
+  const dispatch = useDispatch()
+
+  const handleClick = () => {
+    dispatch(createPost({ 
+      'title': title.value,
+      'body': body.value,
+      'user_uuid': JSON.parse(uuidUser)
+    }))
+  }
+
   return (
     <div>
       <div>
@@ -37,7 +51,10 @@ export const CreatePost = () => {
           size="large"
           color="primary"
           startIcon={<SaveOutlined />}
-        >Crear Post</Button>
+          onClick={handleClick}
+        >
+          Crear Post
+        </Button>
       </div>
     </div>
   )
