@@ -18,7 +18,7 @@ export const CreatePost = () => {
     dispatch(createPost({ 
       'title': title.value,
       'body': body.value,
-      'user_uuid': JSON.parse(uuidUser)
+      'user_uuid': uuidUser
     }))
   }
 

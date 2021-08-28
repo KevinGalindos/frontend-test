@@ -16,8 +16,9 @@ const Posts = ( ) => {
   const dispatch = useDispatch()
 
   const { uuidUser } = useSelector(state => state.Auth)
+  
   useEffect(() => {
-    dispatch(getPosts({ id: JSON.parse(uuidUser) }))
+    dispatch(getPosts({ id: uuidUser }))
   }, [dispatch, uuidUser])
 
   const { loading, postList, message, error } = useSelector(state => state.Posts)

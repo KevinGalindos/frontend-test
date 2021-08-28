@@ -171,7 +171,7 @@ export const PostsSlice = createSlice({
     }),
     deletePostSuccess: (state, { payload }) => {
       let newList = state.postList;
-      newList.splice(newList.indexOf(payload.id))
+      newList.splice(newList.indexOf(payload.id), 1)
       return {
         ...state,
         loading: false,

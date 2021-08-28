@@ -12,6 +12,9 @@ export const ActionPosts = ({ idPosts }) => {
       <Tooltip title="Ver Post">
         <IconButton 
           aria-label="details" 
+          style={{
+            backgroundColor: '#00ff68'
+          }}
           onClick = { ()=> setVisibleDetail(true)}
         >
           <Visibility />
@@ -29,6 +32,7 @@ export const ActionPosts = ({ idPosts }) => {
           <Delete />
         </IconButton>
       </Tooltip>
+      
       <DetailModal 
         visible={visibleDetail}
         close={setVisibleDetail}
