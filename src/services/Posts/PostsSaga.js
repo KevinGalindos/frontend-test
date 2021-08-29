@@ -1,7 +1,20 @@
 import { put, takeLatest, all } from "redux-saga/effects";
 
-import { createPost, getPosts, updatePost, deletePost, createPostSuccess, createPostFailed, getPostsSuccess, getPostsFailed } from './index'
-import { POST, GET } from './../../@common/api'
+import { 
+  createPost,
+  createPostFailed, 
+  createPostSuccess, 
+  deletePost,
+  deletePostFailed,
+  deletePostSuccess,
+  getPosts, 
+  getPostsFailed,
+  getPostsSuccess, 
+  updatePost,
+  updatePostFailed,
+  updatePostSuccess 
+} from './index'
+import { POST, GET, DELETE, PUT } from './../../@common/api'
 
 function* CreatePost({ type, payload }){
   const result = yield POST('api/posts', payload);
@@ -28,8 +41,31 @@ function* GetPosts({ type, payload }){
     }))
 }
 
-function* UpdatePost({ type, payload }){}
-function* DeletePost({ type, payload }){}
+function* UpdatePost({ type, payload }){
+  const result = yield PUT(`api/posts/${payload.id}`, payload);
+  console.log(result)
+  if(result.statusText === 'OK')
+    yield put(updatePostSuccess({
+      message: result.statusText,
+      ...result.payload.data
+    }))
+  else 
+    yield put(updatePostFailed({ message: payload.statusText}))
+}
+
+function* DeletePost({ type, payload }){
+  const post = yield DELETE(`api/posts/${payload.id}`)
+  console.log(post)
+  if(post.statusText === 'OK')
+    yield put(deletePostSuccess({
+      id: payload.id,
+      message: 'OK, post eliminado'
+    }))
+  else
+    yield put(deletePostFailed({
+      message: post.statusText
+    }))
+}
 
 function* ActionWatcher(){
   yield takeLatest(createPost, CreatePost)

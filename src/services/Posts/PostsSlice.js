@@ -124,8 +124,13 @@ export const PostsSlice = createSlice({
       },
     }),
     updatePostSuccess: (state, { payload }) => {
-      let newList = state.postList;
-      newList[newList.indexOf(payload.post.id)] = payload.post
+      let newList = [...state.postList]
+      newList[newList.findIndex(item => item.id === payload.id )] = {
+        id: payload.id,
+        title: payload.title,
+        body: payload.body,
+        link: payload.link
+      }
       return {
         ...state,
         loading: false,
@@ -170,7 +175,7 @@ export const PostsSlice = createSlice({
       }
     }),
     deletePostSuccess: (state, { payload }) => {
-      let newList = state.postList;
+      let newList = [...state.postList]
       newList.splice(newList.indexOf(payload.id), 1)
       return {
         ...state,
