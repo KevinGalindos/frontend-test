@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Link } from '@reach/router'
 import { useDispatch } from 'react-redux'
-import { Visibility, VisibilityOff, Facebook, GitHub } from "@material-ui/icons"
+import { Visibility, VisibilityOff, Facebook } from "@material-ui/icons"
 import {
   Button,
   FormControl,
@@ -12,10 +12,10 @@ import {
   InputAdornment,
 } from "@material-ui/core"
 
-import Logo from '../../../assets/Logo-medium.svg'
 import { useInput } from "./../../../hooks/useInput"
 import { login } from './../../../services/Auth'
 
+import Logo from '../../../assets/Logo-medium.svg'
 import "./Login.scss"
 
 const Login = () => {
@@ -104,16 +104,13 @@ const Login = () => {
               variant="contained" 
               onClick={()=>submitLogin({ method: 'Google' })}
             >
-              <GitHub />
-            </Button>
-            <Button>
               Google
             </Button>
           </div>
         </form>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login
