@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import { string, number } from 'prop-types'
+import { string, number, any } from 'prop-types'
 
-export const useInput = ({ type, min, max }) => {
-  const [value, setValue] = useState('')
+export const useInput = ({ type, min, max, val = undefined }) => {
+  const [value, setValue] = useState(val)
 
   const [stateInput, setStateInput] = useState({
     message: '',
@@ -43,5 +43,6 @@ export const useInput = ({ type, min, max }) => {
 useInput.propTypes = {
   type: string.isRequired,
   min: number,
-  max: number
+  max: number,
+  val: any
 }
