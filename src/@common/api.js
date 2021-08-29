@@ -28,8 +28,6 @@ export const GET = async (url, params) => {
 };
 
 export const POST = async (url, body, header) => {
-  console.log(url)
-  console.log(body)
   return fetch(`${BASE_URL_API}/${url}`, {
       method: "POST",
       headers: header
@@ -52,6 +50,46 @@ export const POST = async (url, body, header) => {
     .catch(err => err)
 };
 
-export const PUT = (url, body) => {}
+export const PUT = async (url, body, header) => {
+  return fetch(`${BASE_URL_API}/${url}`, {
+    method: "PUT",
+    headers: header
+      ? header 
+      : {
+        Accept: "application/json",
+        "Content-type": "application/json", 
+      },
+    body: JSON.stringify(body),
+  })
+    .then(async res => {
+      if (res.status === 401) {
+        Store.dispatch(logout())
+        return res
+      }
+      res.payload = await res.json();
+      return res;
+    })
+    .catch(res => res);
+}
 
-export const DELETE = (url, body) => {}
+export const DELETE = async (url, body, header) => {
+  return fetch(`${BASE_URL_API}/${url}`, {
+    method: "DELETE",
+    headers: header
+      ? header
+      : {
+          Accept: "application/json",
+          "Content-type": "application/json",
+        },
+    body: body ? JSON.stringify(body) : "",
+    })
+    .then(async res => {
+      if (res.status === 401) {
+        Store.dispatch(logout())
+        return res
+      }
+      res.payload = await res.json()
+      return res
+    })
+    .catch(err => err)
+}
