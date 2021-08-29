@@ -1,1 +1,1 @@
-export { DetailModal } from './DetailModal'
+export { ModalPost } from './ModalPost'

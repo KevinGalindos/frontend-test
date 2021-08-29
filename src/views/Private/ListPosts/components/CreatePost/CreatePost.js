@@ -8,19 +8,18 @@ import { useInput } from './../../../../../hooks/useInput'
 import "./CreatePost.scss"
 
 export const CreatePost = () => {
-  const title = useInput({ type: 'text', min: 4, max: 45 })
-  const body = useInput({ type: 'text', min: 1, max: 240 })
+  const title = useInput({ type: 'text', min: 4, max: 45, val: '' })
+  const body = useInput({ type: 'text', min: 1, max: 240, val: '' })
   const { uuidUser } = useSelector(state => state.Auth)
 
   const dispatch = useDispatch()
 
-  const handleClick = () => {
+  const handleClick = () => 
     dispatch(createPost({ 
       'title': title.value,
       'body': body.value,
       'user_uuid': uuidUser
     }))
-  }
 
   return (
     <div>

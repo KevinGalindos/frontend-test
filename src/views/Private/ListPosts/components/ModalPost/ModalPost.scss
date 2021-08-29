@@ -1,0 +1,10 @@
+.close{
+ position: absolute;
+ right: 0;
+  &:hover{
+    cursor: pointer;
+  }
+}
+.title-modal{
+  padding-top: 10 24px;
+}

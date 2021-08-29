@@ -1,1 +1,0 @@
-export { UpdatePosts } from './UpdatePosts'

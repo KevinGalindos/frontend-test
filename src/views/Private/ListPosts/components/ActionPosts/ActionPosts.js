@@ -1,47 +1,58 @@
-import { useState } from 'react'
 import { IconButton, Tooltip } from '@material-ui/core'
-import { Delete, Visibility, Edit } from '@material-ui/icons'
-import { number } from 'prop-types'
+import { Delete, Visibility, Edit, Star } from '@material-ui/icons'
+import { number, func } from 'prop-types'
 
-import { DetailModal } from './../ModalPost'
-
-export const ActionPosts = ({ idPosts }) => {
-  const [visibleDetail, setVisibleDetail] = useState(false)
+export const ActionPosts = ({ idPosts, handleClickModal }) => {
   return (
     <div>
       <Tooltip title="Ver Post">
         <IconButton 
           aria-label="details" 
-          style={{
-            backgroundColor: '#00ff68'
-          }}
-          onClick = { ()=> setVisibleDetail(true)}
+          onClick={ 
+            handleClickModal({ action: 'detail', id: idPosts }) 
+          }
         >
           <Visibility />
         </IconButton>
       </Tooltip>
 
       <Tooltip title="Editar Post">
-        <IconButton aria-label="edit">
+        <IconButton 
+          aria-label="edit"
+          onClick={ 
+            handleClickModal({ action: 'update', id: idPosts }) 
+          }
+        >
           <Edit />
         </IconButton>
       </Tooltip>
 
-      <Tooltip title="Ver Post">
-        <IconButton aria-label="delete">
+      <Tooltip title="Eliminar Post">
+        <IconButton 
+          aria-label="delete"
+          onClick={ 
+            handleClickModal({ action: 'delete', id: idPosts })
+           }
+        >
           <Delete />
         </IconButton>
       </Tooltip>
-      
-      <DetailModal 
-        visible={visibleDetail}
-        close={setVisibleDetail}
-        id={idPosts}
-      />
+
+      <Tooltip title="Agregar Favorito">
+        <IconButton 
+          aria-label="favorite"
+          onClick={ 
+            handleClickModal({ action: 'favorite', id: idPosts }) 
+          }
+        >
+          <Star />
+        </IconButton>
+      </Tooltip>
     </div>
   )
 }
 
 ActionPosts.propTypes = {
-  idPosts: number.isRequired
+  idPosts: number.isRequired,
+  handleClickModal: func.isRequired
 }
