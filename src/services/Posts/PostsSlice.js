@@ -60,7 +60,7 @@ export const PostsSlice = createSlice({
       ...state,
       loading: false,
       error: {
-        ...state.success,
+        ...state.error,
         createPost: true
       },
       message: {
