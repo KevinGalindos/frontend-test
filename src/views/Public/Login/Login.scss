@@ -4,13 +4,16 @@
     color: #0e0e0e;
     image: url("../../../assets/background.png");
     position: center;
-    repeat: no-reapeat;
+    repeat: no-repeat;
     size: cover;
   }
   display: flex;
+  flex-direction: column;
   height: 100vh;
   justify-content: center;
   width: 100%;
+  
+
   .container{
     align-items: center;
     display: flex;

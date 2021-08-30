@@ -1,21 +1,35 @@
-import LogoWaco from '../../assets/Logo-horizontal.png'
+import { Link } from "@reach/router"
 
+import WacoServices from '../../assets/logo-h.png'
+
+import "./Navbar.scss"
 
 export const Navbar = () => {
   return (
-    <nav className="navbar">
-      <div className="navbar_logo">
-        <img src={LogoWaco} alt="WacoServices LogoWaco" />
-      </div>
+    <div className="navbar">
+      <div className="container">
+        <div className="navbar_content">
+          <div className="navbar_content_logo">
+            <Link to="/">
+              <img src={WacoServices} alt="Waco services" />
+            </Link>
+          </div>
 
-      <div className="navbar_links">
-        <ul className="navbar_links_list">
-          <li className="item-link">INICIO</li>
-          <li className="item-link">BENEFICIOS</li>
-          <li className="item-link">Login</li>
-        </ul>
+          <div className="navbar_content_links">
+            <ul className="list-items">
+              <li className="item-link">
+                <Link to="/">INICIO</Link>
+              </li>
+              <li className="item-link">
+                <Link to="/">BENEFICIOS</Link>
+              </li>
+              <li className="item-link">
+                <Link to="/login">Login</Link>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
-      
-    </nav>
-  )
-}
+    </div>
+  );
+};
