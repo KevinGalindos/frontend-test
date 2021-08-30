@@ -52,7 +52,8 @@ export const PostsSlice = createSlice({
           id: payload.id,
           title: payload.title,
           body: payload.body,
-          link: payload.link
+          link: payload.link,
+          user: payload.user
         }
       ]
     }),

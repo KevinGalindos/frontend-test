@@ -15,7 +15,7 @@ export const ModalPost = ({ id, visible, close, action }) => {
     'detail': <Detail post={currentPost} />,
     'update': <Update post={currentPost} close={close} />,
     'delete': <Delete idPost={id} close={close} />,
-    'favorite': <Favorite post={currentPost} />
+    'favorite': <Favorite post={currentPost} close={close} />
   }
 
   const title = {

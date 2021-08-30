@@ -35,7 +35,9 @@ export const FavoriteSlice = createSlice({
         id: payload.id,
         title: payload.title,
         body: payload.body,
-        uuidUser: payload.uuidUser
+        user: payload.user,
+        link: payload.link,
+        idFirebase: payload.idFirebase
       }]
     }),
     addFavoriteFailed: ( state, { payload } ) => ({

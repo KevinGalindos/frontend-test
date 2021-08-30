@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { List, ListItem, ListItemText } from '@material-ui/core'
 
 import { getFavorite } from './../../../services/Favorite'
+import { Loading } from './../../../components/Loading'
 
 import "./ListFavoritePosts.scss"
 
-const FavoritePosts = () => {
+const ListFavoritePosts = () => {
   const dispatch = useDispatch()
   const { uuidUser } = useSelector(state => state.Auth)
   const { listPostFB, loading, message, error } = useSelector(state => state.Favorite)
@@ -15,9 +16,11 @@ const FavoritePosts = () => {
     dispatch(getFavorite({ id: uuidUser }))
   }, [dispatch, uuidUser])
 
-  return (
+  if(error.get) return <h3>{message}</h3>
+  
+
+  return loading? <Loading /> : (
     <div>
-      favorite posts
       <List>
       {listPostFB.map((post, key)=>(
         <ListItem key={key}>
@@ -33,4 +36,4 @@ const FavoritePosts = () => {
   )
 }
 
-export default FavoritePosts
+export default ListFavoritePosts
