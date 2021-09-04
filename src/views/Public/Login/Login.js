@@ -23,8 +23,8 @@ import './Login.scss'
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false)
-  const username = useInput({ type: 'text', min: 4, max: 45 })
-  const password = useInput({ type: 'password', min: 6, max: 150 })
+  const username = useInput({ type: 'text', min: 4, max: 45, val: '' })
+  const password = useInput({ type: 'password', min: 6, max: 150, val: '' })
   const dispatch = useDispatch()
 
   const handleClickShowPassword = () => setShowPassword(!showPassword)
