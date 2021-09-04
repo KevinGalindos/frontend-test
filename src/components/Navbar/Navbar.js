@@ -1,45 +1,40 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react'
+import { Link } from '@reach/router'
 
-import { Link } from "@reach/router";
+import WacoServices from '../../assets/logo-h.png'
 
-import WacoServices from "../../assets/logo-h.png";
-
-import "./Navbar.scss";
+import './Navbar.scss'
 
 export const Navbar = () => {
-  const [click, setClick] = useState(false);
-  const [button, setButton] = useState(true);
-  const [navbar, setNavbar] = useState(false);
-
-  const handleClick = () => setClick(!click);
-  const closeMobileMenu = () => setClick(false);
+  const [button, setButton] = useState(true)
+  const [navbar, setNavbar] = useState(false)
 
   const showButton = () => {
     if (window.innerWidth <= 900) {
-      setButton(false);
+      setButton(false)
     } else {
-      setButton(true);
+      setButton(true)
     }
-  };
+  }
 
   useEffect(() => {
-    showButton();
-  }, []);
+    showButton()
+  }, [])
 
-  window.addEventListener("resize", showButton);
+  window.addEventListener('resize', showButton)
 
   const changeBackground = () => {
     if (window.scrollY >= 120) {
-      setNavbar(true);
+      setNavbar(true)
     } else {
-      setNavbar(false);
+      setNavbar(false)
     }
-  };
+  }
 
-  window.addEventListener("scroll", changeBackground);
+  window.addEventListener('scroll', changeBackground)
 
   return (
-    <nav className={navbar ? "navbar active" : "navbar"}>
+    <nav className={navbar ? 'navbar active' : 'navbar'}>
       <div className="container">
         <div className="navbar_content">
           <div className="navbar_content_logo">
@@ -68,5 +63,5 @@ export const Navbar = () => {
         </div>
       </div>
     </nav>
-  );
-};
+  )
+}
