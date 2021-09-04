@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { List, ListItem, ListItemText } from '@material-ui/core'
 
-import { CreatePost } from './components/CreatePost'
 import { Loading } from './../../../components/Loading'
 import { ActionPosts } from './components/ActionPosts'
 import { ModalPost } from './components/ModalPost'
@@ -67,7 +66,6 @@ const ListPosts = ({ id }) => {
           </ListItem>
         ))}
       </List>
-      <CreatePost />
       <ModalPost
         id={modal.id}
         visible={modal.visible}

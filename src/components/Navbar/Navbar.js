@@ -9,13 +9,7 @@ export const Navbar = () => {
   const [button, setButton] = useState(true)
   const [navbar, setNavbar] = useState(false)
 
-  const showButton = () => {
-    if (window.innerWidth <= 900) {
-      setButton(false)
-    } else {
-      setButton(true)
-    }
-  }
+  const showButton = () => setButton(window.innerWidth <= 900 ? false : true)
 
   useEffect(() => {
     showButton()

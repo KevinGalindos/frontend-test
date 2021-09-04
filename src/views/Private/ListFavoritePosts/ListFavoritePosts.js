@@ -9,7 +9,7 @@ import './ListFavoritePosts.scss'
 
 const ListFavoritePosts = ({ id }) => {
   const dispatch = useDispatch()
-  const { listPostFB, loading, message, error } = useSelector(
+  const { listPostFB, loading, message, error, success } = useSelector(
     state => state.Favorite
   )
 
@@ -21,7 +21,9 @@ const ListFavoritePosts = ({ id }) => {
 
   if (listPostFB.length < 1 && error.get) return <h3>{message}</h3>
 
-  return (
+  return !success.get ? (
+    <Loading />
+  ) : (
     <div>
       <List>
         {listPostFB.map((post, key) => (

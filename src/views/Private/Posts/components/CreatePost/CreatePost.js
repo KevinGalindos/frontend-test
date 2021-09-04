@@ -2,10 +2,10 @@ import { TextField, TextareaAutosize, Button } from '@material-ui/core'
 import { SaveOutlined } from '@material-ui/icons'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { createPost} from './../../../../../services/Posts'
+import { createPost } from './../../../../../services/Posts'
 import { useInput } from './../../../../../hooks/useInput'
 
-import "./CreatePost.scss"
+import './CreatePost.scss'
 
 export const CreatePost = () => {
   const title = useInput({ type: 'text', min: 4, max: 45, val: '' })
@@ -14,19 +14,21 @@ export const CreatePost = () => {
 
   const dispatch = useDispatch()
 
-  const handleClick = () => 
-    dispatch(createPost({ 
-      'title': title.value,
-      'body': body.value,
-      'user_uuid': uuidUser
-    }))
+  const handleClick = () =>
+    dispatch(
+      createPost({
+        title: title.value,
+        body: body.value,
+        user_uuid: JSON.parse(uuidUser),
+      })
+    )
 
   return (
     <div>
       <div>
-        <TextField 
+        <TextField
           required
-          label="Titulo del post" 
+          label="Titulo del post"
           variant="outlined"
           helperText={title.stateInput.message}
           error={title.stateInput.error}
@@ -34,7 +36,7 @@ export const CreatePost = () => {
           onChange={title.onChangeInput}
           type={title.type}
         />
-        <TextareaAutosize 
+        <TextareaAutosize
           required
           minRows={3}
           placeholder="Descripcion del post"

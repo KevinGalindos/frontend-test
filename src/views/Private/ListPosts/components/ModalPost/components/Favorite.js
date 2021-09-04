@@ -6,18 +6,18 @@ import { addFavorite } from './../../../../../../services/Favorite'
 
 export const Favorite = ({ post, close }) => {
   const dispatch = useDispatch()
-  
+
   console.log(post)
   const handleAddFavorite = () => {
-    dispatch(addFavorite({
-      ...post,
-      user: JSON.parse(post.user)
-    }))
+    dispatch(
+      addFavorite({
+        ...post,
+        user: post.user,
+      })
+    )
     close()
   } //logic redux
-  return (
-    <Button onClick={handleAddFavorite}>Favorito</Button>
-  )
+  return <Button onClick={handleAddFavorite}>Favorito</Button>
 }
 
 Favorite.propTypes = {
@@ -26,6 +26,6 @@ Favorite.propTypes = {
     title: string.isRequired,
     body: string.isRequired,
     link: string.isRequired,
-    user: string.isRequired
-  })
+    user: string.isRequired,
+  }),
 }

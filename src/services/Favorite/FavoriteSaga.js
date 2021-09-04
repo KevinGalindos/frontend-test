@@ -56,7 +56,8 @@ function* AddFavorite({ type, payload }) {
       })
   )
   let index = favorites.findIndex(i => i.user === payload.user)
-  if (!index) {
+  console.log(index)
+  if (index === -1) {
     const favorite = yield call(
       () =>
         new Promise((resolve, reject) => {

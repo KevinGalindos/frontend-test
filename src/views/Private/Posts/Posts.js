@@ -3,20 +3,27 @@ import { useSelector } from 'react-redux'
 
 import ListPosts from '../ListPosts'
 import ListFavoritePosts from '../ListFavoritePosts'
+import { CreatePost } from './components/CreatePost/CreatePost'
+import { FloatingButton } from './../../../components/FloatingButton'
 
 const Posts = () => {
   const { uuidUser } = useSelector(state => state.Auth)
+  console.log(uuidUser)
   return (
     <div>
+      <FloatingButton />
       <Grid container direction="row" justifyContent="center">
         <Grid item xs={6}>
           <h2>posts</h2>
-          <ListPosts id={uuidUser} />
+          <ListPosts id={JSON.stringify(uuidUser)} />
         </Grid>
         <Grid item xs={6}>
           <h2>favoritos</h2>
-          <ListFavoritePosts id={uuidUser} />
+          <ListFavoritePosts id={JSON.stringify(uuidUser)} />
         </Grid>
+      </Grid>
+      <Grid container direction="row" justifyContent="center">
+        <CreatePost />
       </Grid>
     </div>
   )
