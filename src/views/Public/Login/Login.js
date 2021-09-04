@@ -96,6 +96,7 @@ const Login = () => {
               Ingresar
             </Button>
 
+            <div className="login_social">
             <Button
               variant="contained"
               onClick={() => submitLogin({ method: 'Facebook' })}
@@ -109,6 +110,7 @@ const Login = () => {
             >
               Google
             </Button>
+            </div>
           </div>
         </form>
       </div>
