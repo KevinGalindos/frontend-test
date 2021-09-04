@@ -1,12 +1,45 @@
-import { Link } from "@reach/router"
+import { useEffect, useState } from "react";
 
-import WacoServices from '../../assets/logo-h.png'
+import { Link } from "@reach/router";
 
-import "./Navbar.scss"
+import WacoServices from "../../assets/logo-h.png";
+
+import "./Navbar.scss";
 
 export const Navbar = () => {
+  const [click, setClick] = useState(false);
+  const [button, setButton] = useState(true);
+  const [navbar, setNavbar] = useState(false);
+
+  const handleClick = () => setClick(!click);
+  const closeMobileMenu = () => setClick(false);
+
+  const showButton = () => {
+    if (window.innerWidth <= 900) {
+      setButton(false);
+    } else {
+      setButton(true);
+    }
+  };
+
+  useEffect(() => {
+    showButton();
+  }, []);
+
+  window.addEventListener("resize", showButton);
+
+  const changeBackground = () => {
+    if (window.scrollY >= 120) {
+      setNavbar(true);
+    } else {
+      setNavbar(false);
+    }
+  };
+
+  window.addEventListener("scroll", changeBackground);
+
   return (
-    <div className="navbar">
+    <nav className={navbar ? "navbar active" : "navbar"}>
       <div className="container">
         <div className="navbar_content">
           <div className="navbar_content_logo">
@@ -18,10 +51,14 @@ export const Navbar = () => {
           <div className="navbar_content_links">
             <ul className="list-items">
               <li className="item-link">
-                <Link to="/">INICIO</Link>
+                <a href="#home" rel="noreferrer">
+                  INICIO
+                </a>
               </li>
               <li className="item-link">
-                <Link to="/">BENEFICIOS</Link>
+                <a href="#benefits" rel="noreferrer">
+                  BENEFICIOS
+                </a>
               </li>
               <li className="item-link">
                 <Link to="/login">Login</Link>
@@ -30,6 +67,6 @@ export const Navbar = () => {
           </div>
         </div>
       </div>
-    </div>
+    </nav>
   );
 };
