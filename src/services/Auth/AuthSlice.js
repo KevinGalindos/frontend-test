@@ -6,8 +6,9 @@ export const initialState = {
   authentication: CheckItem(),
   uuidUser: GetItem(),
   loading: false,
+  error: false,
   account: '',
-  message: ''
+  message: '',
 }
 
 export const AuthSlice = createSlice({
@@ -17,21 +18,23 @@ export const AuthSlice = createSlice({
     login: (state, { payload }) => ({
       ...state,
       loading: true,
-      message: ''
+      message: '',
     }),
     loginSuccess: (state, { payload }) => ({
       ...state,
       loading: false,
       authentication: payload.auth,
       uuidUser: payload.uuidUser,
-      message: payload.message
+      message: payload.message,
+      error: false,
     }),
     loginFailed: (state, { payload }) => ({
       ...state,
       loading: false,
       authentication: false,
       uuidUser: '',
-      message: payload.message
+      message: payload.message,
+      error: true,
     }),
     signup: (state, { payload }) => ({
       ...state,
@@ -42,16 +45,20 @@ export const AuthSlice = createSlice({
       ...state,
       loading: false,
       message: payload.message,
+      error: false,
     }),
     signupFailed: (state, { payload }) => ({
       ...state,
       loading: false,
-      message: payload.message
+      message: payload.message,
+      error: true,
     }),
-    logout: (state) => ({
+    logout: state => ({
       ...state,
       uuidUser: '',
-      authentication: ''
-    })
-  }
+      authentication: '',
+      error: false,
+      message: '',
+    }),
+  },
 })

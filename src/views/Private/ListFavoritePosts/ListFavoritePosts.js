@@ -17,11 +17,11 @@ const ListFavoritePosts = ({ id }) => {
     dispatch(getFavorite({ id: id }))
   }, [dispatch, id])
 
-  //if (listPostFB.length < 1 || error.get) return <h3>{message}</h3>
+  if (loading) return <Loading />
 
-  return loading ? (
-    <Loading />
-  ) : (
+  if (listPostFB.length < 1 && error.get) return <h3>{message}</h3>
+
+  return (
     <div>
       <List>
         {listPostFB.map((post, key) => (
