@@ -1,21 +1,67 @@
-import LogoWaco from '../../assets/Logo-horizontal.png'
+import { useEffect, useState } from 'react'
+import { Link } from '@reach/router'
 
+import WacoServices from '../../assets/logo-h.png'
+
+import './Navbar.scss'
 
 export const Navbar = () => {
-  return (
-    <nav className="navbar">
-      <div className="navbar_logo">
-        <img src={LogoWaco} alt="WacoServices LogoWaco" />
-      </div>
+  const [button, setButton] = useState(true)
+  const [navbar, setNavbar] = useState(false)
 
-      <div className="navbar_links">
-        <ul className="navbar_links_list">
-          <li className="item-link">INICIO</li>
-          <li className="item-link">BENEFICIOS</li>
-          <li className="item-link">Login</li>
-        </ul>
+  const showButton = () => {
+    if (window.innerWidth <= 900) {
+      setButton(false)
+    } else {
+      setButton(true)
+    }
+  }
+
+  useEffect(() => {
+    showButton()
+  }, [])
+
+  window.addEventListener('resize', showButton)
+
+  const changeBackground = () => {
+    if (window.scrollY >= 120) {
+      setNavbar(true)
+    } else {
+      setNavbar(false)
+    }
+  }
+
+  window.addEventListener('scroll', changeBackground)
+
+  return (
+    <nav className={navbar ? 'navbar active' : 'navbar'}>
+      <div className="container">
+        <div className="navbar_content">
+          <div className="navbar_content_logo">
+            <Link to="/">
+              <img src={WacoServices} alt="Waco services" />
+            </Link>
+          </div>
+
+          <div className="navbar_content_links">
+            <ul className="list-items">
+              <li className="item-link">
+                <a href="#home" rel="noreferrer">
+                  INICIO
+                </a>
+              </li>
+              <li className="item-link">
+                <a href="#benefits" rel="noreferrer">
+                  BENEFICIOS
+                </a>
+              </li>
+              <li className="item-link">
+                <Link to="/login">Login</Link>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
-      
     </nav>
   )
 }
