@@ -15,11 +15,11 @@ const Posts = () => {
       <Grid container direction="row" justifyContent="center">
         <Grid item xs={6}>
           <h2>posts</h2>
-          <ListPosts id={JSON.stringify(uuidUser)} />
+          <ListPosts id={uuidUser} />
         </Grid>
         <Grid item xs={6}>
           <h2>favoritos</h2>
-          <ListFavoritePosts id={JSON.stringify(uuidUser)} />
+          <ListFavoritePosts id={uuidUser} />
         </Grid>
       </Grid>
       <Grid container direction="row" justifyContent="center">
