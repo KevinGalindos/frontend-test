@@ -1,7 +1,7 @@
-import { useState } from 'react'
-import { Link } from '@reach/router'
-import { useDispatch } from 'react-redux'
-import { Visibility, VisibilityOff, Facebook } from '@material-ui/icons'
+import { useState } from "react";
+import { Link } from "@reach/router";
+import { useDispatch } from "react-redux";
+import { Visibility, VisibilityOff } from "@material-ui/icons";
 
 import {
   Button,
@@ -11,28 +11,32 @@ import {
   IconButton,
   OutlinedInput,
   InputAdornment,
-} from '@material-ui/core'
+} from "@material-ui/core";
 
-import Logo from '../../../assets/Logo-medium.svg'
-import { useInput } from './../../../hooks/useInput'
-import { login } from './../../../services/Auth'
+import Logo from "../../../assets/Logo-medium.svg";
+import Google from "../../../assets/google.svg"
+import Facebook from "../../../assets/facebook.svg"
 
-import { Navbar } from '../../../components/Navbar'
+import { useInput } from "./../../../hooks/useInput";
+import { login } from "./../../../services/Auth";
 
-import './Login.scss'
+import { Navbar } from "../../../components/Navbar";
+
+import "./Login.scss";
 
 const Login = () => {
-  const [showPassword, setShowPassword] = useState(false)
-  const username = useInput({ type: 'text', min: 4, max: 45, val: '' })
-  const password = useInput({ type: 'password', min: 6, max: 150, val: '' })
-  const dispatch = useDispatch()
+  const [showPassword, setShowPassword] = useState(false);
+  const username = useInput({ type: "text", min: 4, max: 45, val: "" });
+  const password = useInput({ type: "password", min: 6, max: 150, val: "" });
+  const dispatch = useDispatch();
 
-  const handleClickShowPassword = () => setShowPassword(!showPassword)
+  const handleClickShowPassword = () => setShowPassword(!showPassword);
 
   const submitLogin = ({ method }) => {
-    if (method) dispatch(login({ method: method }))
-    else dispatch(login({ username: username.value, password: password.value }))
-  }
+    if (method) dispatch(login({ method: method }));
+    else
+      dispatch(login({ username: username.value, password: password.value }));
+  };
 
   return (
     <div className="login">
@@ -68,7 +72,7 @@ const Login = () => {
               </InputLabel>
               <OutlinedInput
                 id="outlined-adornment-password"
-                type={showPassword ? 'text' : password.type}
+                type={showPassword ? "text" : password.type}
                 value={password.value}
                 onChange={password.onChangeInput}
                 endAdornment={
@@ -97,25 +101,28 @@ const Login = () => {
             </Button>
 
             <div className="login_social">
-            <Button
-              variant="contained"
-              onClick={() => submitLogin({ method: 'Facebook' })}
-            >
-              <Facebook />
-            </Button>
+              <Button
+                variant="contained"
+                onClick={() => submitLogin({ method: "Facebook" })}
+              >
+                <img src={Facebook} alt="Facebook" />
+              </Button>
 
-            <Button
-              variant="contained"
-              onClick={() => submitLogin({ method: 'Google' })}
-            >
-              Google
-            </Button>
+              <Button
+                variant="contained"
+                onClick={() => submitLogin({ method: "Google" })}
+              >
+                <img src={Google} alt="Google" />
+              </Button>
+            </div>
+            <div className="login_register">
+              <Link to="/signup">Registrate</Link>
             </div>
           </div>
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
